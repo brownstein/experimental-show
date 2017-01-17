@@ -32,13 +32,18 @@ let mainWindow;
 function createWindow () {
 
   // kick off loading he target file
-  const targetFileName = loadTargetFile(process.argv[2]);
+  const targetFileName = loadTargetFile(cmdArgs[0]);
   const fileLoadStub = targetFileName;
 
   // set up UI readiness callback
   const windowLoadStub = new Promise((resolve, reject) => {
     ipcMain.on("UI-ready", (event, msg) => {
       resolve(msg || "UI-ready");
+    });
+    ipcMain.on("abort-on-unknown-file-type", (event, msg) => {
+        mainWindow = null;
+        console.error(msg);
+        process.exit(1);
     });
   });
 
@@ -55,7 +60,7 @@ function createWindow () {
   }));
 
   // show console
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   // exit handler
   mainWindow.on("closed", function () {

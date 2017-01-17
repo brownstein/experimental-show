@@ -1,7 +1,7 @@
 {
   "name": "show",
   "version": "0.0.1",
-  "description": "A minimal Electron application",
+  "description": "A command line utility for viewing Social Tables floor data",
   "main": "main.js",
   "bin": {
     "show": "./scripts/show.js"
@@ -10,10 +10,10 @@
     "start": "electron ."
   },
   "dependencies": {
+    "ajv": "^4.10.4",
     "electron": "^1.4.1",
     "jsx-require-extension": "^0.2.0",
-    "node-persist": "^2.0.7",
     "react": "^15.4.2",
-    "shelljs": "^0.7.6"
+    "three": "^0.83.0"
   }
 }
